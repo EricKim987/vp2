@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { getCategories } from '@/api/TheMealDB';
+import { useQuery } from '@tanstack/vue-query';
 import { ref } from 'vue';
 
 const searchText = ref('');
+const { isPending, isError, data, error } = useQuery({
+  queryKey: ['categories'],
+  queryFn: getCategories
+})
 </script>
 
 <template>
@@ -35,6 +41,20 @@ const searchText = ref('');
         </svg>
       </button>
     </div>
+    <div class="categories">
+      <span v-if="isPending">Loading...</span>
+      <span v-else-if="isError">Error:{{ error?.message }}</span>
+      <div v-else
+           class="category-container">
+        <div v-for="category in data?.categories"
+             :key="category.idCategory"
+             class="category">
+          <img :src="category.strCategoryThumb"
+               :alt="category.strCategory">
+          <div class="category-text">{{ category.strCategory }}</div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -43,6 +63,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1800px;
 }
 
 .title {
@@ -55,6 +76,8 @@ main {
   display: flex;
   width: 50%;
   margin-top: 50px;
+  border: var(--color-border) solid 1px;
+  border-radius: 5px;
 }
 
 .search {
@@ -68,5 +91,42 @@ main {
   display: inline-block;
   border: none;
   padding: 0 5px;
+}
+
+.categories {
+  align-self: stretch;
+  margin-top: 50px;
+}
+
+.category-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 30px;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+
+  .category-text {
+    margin-top: 5px;
+  }
+
+  &:hover {
+    .category-text {
+      color: var(--color-text-hover);
+    }
+  }
+
 }
 </style>
