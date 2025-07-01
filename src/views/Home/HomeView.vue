@@ -2,6 +2,7 @@
 import { getCategories } from '@/api/TheMealDB';
 import { useQuery } from '@tanstack/vue-query';
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const searchText = ref('');
 const { isPending, isError, data, error } = useQuery({
@@ -46,13 +47,14 @@ const { isPending, isError, data, error } = useQuery({
       <span v-else-if="isError">Error:{{ error?.message }}</span>
       <div v-else
            class="category-container">
-        <div v-for="category in data?.categories"
-             :key="category.idCategory"
-             class="category">
+        <RouterLink v-for="category in data?.categories"
+                    :key="category.idCategory"
+                    :to="`/category/${category.strCategory}`"
+                    class="category">
           <img :src="category.strCategoryThumb"
                :alt="category.strCategory">
           <div class="category-text">{{ category.strCategory }}</div>
-        </div>
+        </RouterLink>
       </div>
     </div>
   </main>
@@ -110,6 +112,8 @@ main {
   align-items: center;
   cursor: pointer;
   padding: 5px 0;
+  text-decoration: none;
+  color: var(--color-text);
 
   img {
     width: 100%;
