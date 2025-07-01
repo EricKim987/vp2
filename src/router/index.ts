@@ -13,7 +13,8 @@ const router = createRouter({
 		{
 			path: "/category/:name",
 			name: "category",
-			component: CategoryView
+			component: CategoryView,
+			props: true
 		}
 	],
 });
