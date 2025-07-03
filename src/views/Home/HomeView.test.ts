@@ -26,9 +26,22 @@ describe("HomeView", () => {
 	beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 	afterAll(() => server.close());
 	afterEach(() => server.resetHandlers());
+
 	it("renders title", () => {
 		renderWithVueQuery(HomeView);
 		const title = screen.getByText("Recipes");
 		expect(title).toBeInTheDocument();
+	});
+
+	it("renders categories", async () => {
+		renderWithVueQuery(HomeView);
+
+		const { strCategory, strCategoryThumb, strCategoryDescription } =
+			categories.categories[0];
+		const categoryText = await screen.findByText(strCategory);
+		expect(categoryText).toBeInTheDocument();
+
+		const categoryImage = screen.getByAltText(strCategory);
+		expect(categoryImage).toHaveAttribute("src", strCategoryThumb);
 	});
 });
