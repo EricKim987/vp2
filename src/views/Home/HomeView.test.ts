@@ -1,9 +1,9 @@
 import HomeView from "./HomeView.vue";
-import { render, screen } from "@testing-library/vue";
-import { VueQueryPlugin } from "@tanstack/vue-query";
+import { screen } from "@testing-library/vue";
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import { getCategoriesUrl, type CategoriesType } from "@/api/TheMealDB";
+import { renderWithVueQuery } from "@/utils/tests";
 
 const categories: CategoriesType = {
 	categories: [
@@ -27,7 +27,7 @@ describe("HomeView", () => {
 	afterAll(() => server.close());
 	afterEach(() => server.resetHandlers());
 	it("renders title", () => {
-		render(HomeView, { global: { plugins: [VueQueryPlugin] } });
+		renderWithVueQuery(HomeView);
 		const title = screen.getByText("Recipes");
 		expect(title).toBeInTheDocument();
 	});
