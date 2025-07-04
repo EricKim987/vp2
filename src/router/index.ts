@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/Home/HomeView.vue";
 import CategoryView from "@/views/Category/CategoryView.vue";
+import SearchView from "@/views/Search/SearchView.vue";
 
 export const routes = [
 	{
@@ -13,6 +14,11 @@ export const routes = [
 		name: "category",
 		component: CategoryView,
 		props: true,
+	},
+	{
+		path: "/search",
+		name: "search",
+		component: SearchView,
 	},
 ];
 

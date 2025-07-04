@@ -2,9 +2,19 @@
 import { getCategories } from '@/api/TheMealDB';
 import { useQuery } from '@tanstack/vue-query';
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const searchText = ref('');
+const search = (event: KeyboardEvent) => {
+  if (event.key !== 'Enter' || searchText.value === '') return;
+  if (searchText.value.trim() !== '') {
+    // Navigate to the search results page
+    router.push(`/search?q=${searchText.value}`);
+  }
+};
+
 const { isPending, isError, data, error } = useQuery({
   queryKey: ['categories'],
   queryFn: getCategories
@@ -18,6 +28,7 @@ const { isPending, isError, data, error } = useQuery({
       <input type="text"
              class="search"
              v-model="searchText"
+             @keydown="search"
              placeholder="Search recipes and more…" />
       <button type="button"
               class="search-button"
