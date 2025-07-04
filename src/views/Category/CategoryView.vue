@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { getMealsByCategory } from '@/api/TheMealDB';
-import router from '@/router';
 import { useQuery } from '@tanstack/vue-query';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { name } = defineProps<{
   name: string;
 }>();
