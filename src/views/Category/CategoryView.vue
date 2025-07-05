@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { getMealsByCategory } from '@/api/TheMealDB';
 import { useQuery } from '@tanstack/vue-query';
-import { useRouter } from 'vue-router';
+import BackButton from '@/components/BackButton.vue';
 
-const router = useRouter();
 const { name } = defineProps<{
   name: string;
 }>();
@@ -15,8 +14,7 @@ const { isPending, isError, data, error } = useQuery({
 </script>
 
 <template>
-  <button class="back-button"
-          @click="router.push('/')">Back</button>
+  <BackButton />
   <div class="title">{{ name }} recipes</div>
   <div v-if="isPending">Loading...</div>
   <div v-else-if="isError">Error: {{ error?.message }}</div>

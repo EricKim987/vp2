@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import SearchInput from '@/components/SearchInput.vue';
-import { useRoute } from 'vue-router';
+import BackButton from '@/components/BackButton.vue';
 
-const route = useRoute()
 </script>
 
 <template>
-  <h1>Search Results {{ $route.query }}</h1>
-  <SearchInput />
+  <BackButton />
+  <main>
+    <h2 class="title">Search Results {{ $route.query }}</h2>
+    <SearchInput />
+    <div class="recipes">
+
+    </div>
+  </main>
 </template>

@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/vue";
 import SearchInput from "./SearchInput.vue";
 import userEvent from "@testing-library/user-event";
-import { useRouter } from "vue-router";
 
 const push = vi.fn();
 vi.mock("vue-router", () => ({
