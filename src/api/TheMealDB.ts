@@ -41,3 +41,14 @@ export async function getMealsByCategory(category: string): Promise<MealsType> {
 	const data = await response.json();
 	return data;
 }
+
+export async function getMealsByIngredient(
+	ingredient: string,
+): Promise<MealsType> {
+	const response = await fetch(`${getMealsByCategoryUrl}?i=${ingredient}`);
+	if (!response.ok) {
+		throw new Error(`Response status: ${response.status}`);
+	}
+	const data = await response.json();
+	return data;
+}
