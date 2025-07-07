@@ -3,6 +3,7 @@ import HomeView from "../views/Home/HomeView.vue";
 import CategoryView from "@/views/Category/CategoryView.vue";
 import SearchView from "@/views/Search/SearchView.vue";
 import RecipeView from "@/views/Recipe/RecipeView.vue";
+import NotFound from "@/views/NotFound/NotFoundView.vue";
 
 export const routes = [
 	{
@@ -26,6 +27,7 @@ export const routes = [
 		name: "recipe",
 		component: RecipeView,
 	},
+	{ path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
 ];
 
 const router = createRouter({
