@@ -12,7 +12,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "format": "biome format --write",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "deploy": "npx wrangler deploy --asserts=./dist"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.81.5",
