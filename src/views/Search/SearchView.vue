@@ -35,7 +35,7 @@ const { isPending, isError, data, error } = useQuery({
   </main>
 </template>
 
-<style>
+<style scoped>
 .search-view {
   display: flex;
   flex-direction: column;

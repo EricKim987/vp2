@@ -48,7 +48,7 @@ const search = () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .search-container {
   display: flex;
   width: 50%;

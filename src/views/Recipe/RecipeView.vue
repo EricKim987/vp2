@@ -75,7 +75,7 @@ function getIngredients(recipe: MealDetailType | null) {
   </main>
 </template>
 
-<style>
+<style scoped>
 .recipe-view {
   max-width: 800px;
   margin: 0 auto;

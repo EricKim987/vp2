@@ -26,7 +26,7 @@ const { isPending, isError, data, error } = useQuery({
             imgSuffix="medium" />
 </template>
 
-<style>
+<style scoped>
 .back-button {
   padding: 5px 10px;
   font-size: 1.1em;
