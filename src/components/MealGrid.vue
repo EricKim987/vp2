@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useRecipes } from '@/stores/recipes';
+import { computed } from 'vue';
+
 
 const { meals } = defineProps<{
   meals: Array<{
@@ -8,6 +11,16 @@ const { meals } = defineProps<{
   }>;
   imgSuffix?: 'small' | 'medium' | 'large';
 }>();
+
+const { saved, saveRecipe, deleteRecipe } = useRecipes();
+
+const saveBtnHandler = (idMeal: string) => {
+  if (!saved.includes(idMeal)) {
+    saveRecipe(idMeal);
+  } else {
+    deleteRecipe(idMeal);
+  }
+};
 </script>
 
 <template>
@@ -22,14 +35,15 @@ const { meals } = defineProps<{
       <div class="meal-info">
         <router-link class="meal-text"
                      :to="`/recipe/${meal.idMeal}`">{{ meal.strMeal }}</router-link>
-        <button class="meal-save-btn">
+        <button class="meal-save-btn"
+                @click="saveBtnHandler(meal.idMeal)">
           <svg aria-hidden="true"
                class="save-btn-icon"
                xmlns="http://www.w3.org/2000/svg"
                width="13"
                height="17.3"
                viewBox="0 0 13 17.3">
-            <path fill="currentColor"
+            <path :fill="saved.includes(meal.idMeal) ? 'var(--color-text-hover)' : 'currentColor'"
                   stroke="var(--color-text)"
                   d="M12.5,16.5l-6-2.8l-6,2.8v-16h12V16.5z"></path>
           </svg>
